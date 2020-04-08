@@ -1,0 +1,126 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="D7BE886F-91D9-54B2-6672-6E99F645FE58" name="INSURANCE">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 06:58:34 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="i_ID" id="3581603F-9D8C-1182-3E1C-D6CED5A1C5A8">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 06:59:31 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="c_ID" id="A65BD1B3-76C9-CD44-1DD7-84822C807E6B">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 07:03:41 UTC</createdTime>
+<generatorID>260C1F40-4CFF-880D-72F9-8BF92765087A</generatorID>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>009F9E07-6669-3AF9-2038-11752818F0F0</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,8,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="INSURANCE_TYPE" id="49F90246-3CB2-7CDD-E54D-61053CF6D4D0">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 07:00:56 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="START_DATE" id="096AC526-C909-6168-D693-8E60DE62220B">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 06:59:51 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="END_DATE" id="39801202-FEA8-7763-79ED-A4AB233737A8">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 07:00:05 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PREMIUM_AMOUNT" id="88F045E5-764B-EEF7-B5AF-3391F54691AA">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 07:00:15 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>10</dataTypePrecision>
+<ownDataTypeParameters>,10,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="STATUS" id="ED0E0214-F138-1344-8A08-7EC9239B7706">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 07:01:17 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT025</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7912535B-30D8-A170-9F90-A82E7803A3D6" name="INSURANCE PK">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 06:59:43 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<engineerTo>
+<item key="4FA17A7D-DABC-FDA9-E07F-26B205FFD5F6" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>3581603F-9D8C-1182-3E1C-D6CED5A1C5A8</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

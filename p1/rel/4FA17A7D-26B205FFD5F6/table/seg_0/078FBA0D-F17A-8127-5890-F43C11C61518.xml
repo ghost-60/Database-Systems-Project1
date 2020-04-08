@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="078FBA0D-F17A-8127-5890-F43C11C61518" name="AUTO_INSURANCE">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-08 02:18:40 UTC</createdTime>
+<generatorID>A02926B9-A405-4625-9A6B-CB61C0A8672C</generatorID>
+<ownerDesignName>p1</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="i_ID" id="16CC832C-6792-059B-4610-A80B08274222">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-08 02:18:40 UTC</createdTime>
+<generatorID>3581603F-9D8C-1182-3E1C-D6CED5A1C5A8</generatorID>
+<ownerDesignName>p1</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>8</dataTypePrecision>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="69F9A6F8-0A48-8EEE-B8DF-A30606F8F24C" referredColumn="AC19911F-A712-758E-9F2E-2ECC060E3EA3"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="FC6AF6A8-E631-8C58-924C-AAAA6D4B8457" name="AUTO_INSURANCE_PK">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-08 02:18:40 UTC</createdTime>
+<generatorID>7912535B-30D8-A170-9F90-A82E7803A3D6</generatorID>
+<ownerDesignName>p1</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="16CC832C-6792-059B-4610-A80B08274222"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5D8DE308-027A-2331-93D7-B7389084C66B" name="AUTO_INSURANCE_INSURANCE_FK">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-08 02:18:40 UTC</createdTime>
+<generatorID>A4C38E79-BF80-9FED-0797-D12B2430CEB7</generatorID>
+<ownerDesignName>p1</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="16CC832C-6792-059B-4610-A80B08274222"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="p1" id="7B88B9A8-6548-B232-FFCD-2F671C3924F1" version="3.5">
+<createdBy>kakay</createdBy>
+<createdTime>2020-04-07 06:45:38 UTC</createdTime>
+<ownerDesignName>p1</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>7B88B9A8-6548-B232-FFCD-2F671C3924F1</designId>
+</OSDM_Design>
