@@ -187,7 +187,134 @@ EXCEPTION
         RAISE;
 END;
 /
+ALTER TABLE customer 
+ADD CONSTRAINT CHK_customer_gender CHECK (gender IN ('M', 'F', NULL));
 
+ALTER TABLE customer 
+ADD CONSTRAINT CHK_customer_marital_status CHECK (marital_status IN ('M', 'S', 'W'));
+
+ALTER TABLE insurance
+ADD CONSTRAINT CHK_customer_insurance_type CHECK (insurance_type IN ('A', 'H'));
+
+ALTER TABLE insurance 
+ADD CONSTRAINT CHK_insurance_status CHECK (i_status IN ('C', 'P'));
+
+ALTER TABLE homes 
+ADD CONSTRAINT CHK_swimming_pool CHECK (swimming_pool IN ('U', 'O', 'I', 'M', NULL));
+
+ALTER TABLE homes 
+ADD CONSTRAINT CHK_home_type CHECK (type IN ('S', 'M', 'C', 'T'));
+
+ALTER TABLE payment 
+ADD CONSTRAINT CHK_payment_type CHECK (payment_method IN ('Paypal', 'Debit', 'Credit', 'Check'));
+
+ALTER TABLE vehicles 
+ADD CONSTRAINT CHK_vehicle_status CHECK (v_status IN ('L', 'F', 'O'));
+
+insert into customer values(1001, 'Kumar', 'Ayush', 'Church', 'M', 'S');
+insert into customer values(1002, 'AAAA', 'BBBB', 'Church', 'F', 'S');
+insert into customer values(1003, 'BBBB', 'CCCC', 'Church', 'M', 'M');
+insert into customer values(1004, 'CCCC', 'DDDD', 'Church', 'F', 'S');
+insert into customer values(1005, 'DDDD', 'EEEE', 'Church', 'M', 'M');
+insert into customer values(1006, 'EEEE', 'FFFF', 'Church', 'F', 'S');
+insert into customer values(1007, 'FFFF', 'GGGG', 'Church', 'M', 'S');
+insert into customer values(1008, 'GGGG', 'HHHH', 'Church', 'F', 'W');
+insert into customer values(1009, 'IIII', 'JJJJ', 'Church', 'M', 'S');
+insert into customer values(1010, 'JJJJ', 'KKKK', 'Church', 'F', 'S');
+insert into customer values(1011, 'KKKK', 'LLLL', 'Church', NULL, 'W');
+
+
+insert into insurance values (2001, 1001, 'A', '10-APR-2020', '25-APR-2020', 22920, 'C');
+insert into insurance values (2002, 1001, 'H', ‘10-APR-2020’, ‘25-APR-2020’, 22920, 'C');
+insert into insurance values (2003, 1002, 'A', '01-APR-2020', '06-APR-2020', 12320, 'P');
+insert into insurance values (2004, 1003, 'H', '12-APR-2020', '28-APR-2020', 13220, 'C');
+insert into insurance values (2005, 1003, 'A', '07-APR-2020', '08-APR-2020', 15620, 'P');
+insert into insurance values (2006, 1004, 'A', '10-APR-2020', '22-APR-2020', 17620, 'C');
+insert into insurance values (2007, 1005, 'A', '13-APR-2020', '29-APR-2020', 12320, 'C');
+insert into insurance values (2008, 1006, 'H', '09-APR-2020', '30-APR-2020', 11220, 'C');
+insert into insurance values (2009, 1007, 'A', '05-APR-2020', '21-APR-2020', 19820, 'C');
+insert into insurance values (2010, 1007, 'H', '14-APR-2020', '22-APR-2020', 11120, 'C');
+insert into insurance values (2011, 1009, 'A', '03-APR-2020', '05-APR-2020', 17720, 'P');
+
+insert into auto_insurance values (2001);
+insert into auto_insurance values (2003);
+insert into auto_insurance values (2005);
+insert into auto_insurance values (2006);
+insert into auto_insurance values (2007);
+insert into auto_insurance values (2009);
+insert into auto_insurance values (2011);
+
+insert into home_insurance values (2002);
+insert into home_insurance values (2004);
+insert into home_insurance values (2008);
+insert into home_insurance values (2010);
+
+
+insert into vehicles values (3001, '10-APR-2004', 'L', 2001);
+insert into vehicles values (3002, '14-APR-2004', 'F', 2003);
+insert into vehicles values (3003, '15-APR-2004', 'O', 2005);
+insert into vehicles values (3004, '16-APR-2004', 'L', 2006);
+insert into vehicles values (3005, '17-APR-2004', 'F', 2007);
+insert into vehicles values (3006, '09-APR-2004', 'O', 2009);
+insert into vehicles values (3007, '08-APR-2004', 'L', 2011);
+insert into vehicles values (3008, '05-APR-2004', 'F', 2001);
+insert into vehicles values (3009, '06-APR-2004', 'O', 2003);
+insert into vehicles values (3010, '07-APR-2004', 'L', 2005);
+insert into vehicles values (3011, '01-APR-2004', 'F', 2006);
+
+
+
+insert into invoice values (4001, '10-Sep-2020', 10002, 2001);
+insert into invoice values (4002, '11-Sep-2020', 10202, 2002);
+insert into invoice values (4003, '12-Sep-2020', 10302, 2003);
+insert into invoice values (4004, '14-Sep-2020', 10502, 2004);
+insert into invoice values (4005, '15-Sep-2020', 10602, 2005);
+insert into invoice values (4006, '13-Sep-2020', 10702, 2006);
+insert into invoice values (4007, '16-Sep-2020', 10802, 2007);
+insert into invoice values (4008, '17-Sep-2020', 10802, 2008);
+insert into invoice values (4009, '18-Sep-2020', 10402, 2009);
+insert into invoice values (4010, '19-Sep-2020', 12202, 2010);
+insert into invoice values (4011, '10-Sep-2020', 16602, 2011);
+
+
+insert into payment values(5001, '11-Apr-2020', 'Debit', 4001);
+insert into payment values(5002, '1-Apr-2020', 'Credit', 4002);
+insert into payment values(5003, '12-Apr-2020', 'Paypal', 4003);
+insert into payment values(5004, '14-Apr-2020', 'Check', 4004);
+insert into payment values(5005, '15-Apr-2020', 'Debit', 4005);
+insert into payment values(5006, '16-Apr-2020', 'Credit', 4006);
+insert into payment values(5007, '17-Apr-2020', 'Paypal', 4007);
+insert into payment values(5008, '14-Apr-2020', 'Check', 4008);
+insert into payment values(5009, '13-Apr-2020', 'Debit', 4009);
+insert into payment values(5010, '12-Apr-2020', 'Credit', 4010);
+insert into payment values(5011, '11-Apr-2020', 'Paypal', 4011);
+
+insert into drivers values(6001, 'e85b67', 'MMMM', 'NNNN', '06-Jan-1997');
+insert into drivers values(6002, 'e85sa7', 'NNNN', 'OOOO', '05-Feb-1997');
+insert into drivers values(6003, 'e8as67', 'OOOO', 'PPPP', '04-Mar-1997');
+insert into drivers values(6004, 'e82367', 'PPPP', 'QQQQ', '03-Apr-1997');
+insert into drivers values(6005, 'e88967', 'QQQQ', 'NNNN', '02-Jun-1997');
+insert into drivers values(6006, 'e8is67', 'RRRR', 'DDDD', '01-Jul-1997');
+insert into drivers values(6007, 'e80f67', 'SSSS', 'BBBB', '09-Aug-1997');
+insert into drivers values(6008, 'e8ms67', 'TTTT', 'NNNN', '08-Sep-1997');
+insert into drivers values(6009, 'e8hs67', 'UUUU', 'GGGG', '07-Oct-1997');
+insert into drivers values(6010, 'e86a67', 'VVVV', 'EEEE', '06-Nov-1997');
+insert into drivers values(6011, 'e80s67', 'WWWW', 'FFFF', '05-Dec-1997');
+
+insert into homes values(7001, '01-Jan-2020', 18892, 50, 'S', '1', '1', 'U', '1', 2002);
+insert into homes values(7002, '02-Apr-2020', 13492, 34, 'M', '0', '1', 'U', '1', 2004);
+insert into homes values(7003, '03-Feb-2020', 17692, 56, 'C', '1', '0', 'U', '1', 2008);
+insert into homes values(7004, '04-Mar-2020', 11292, 43, 'T', '0', '0', 'U', '1', 2010);
+insert into homes values(7005, '05-May-2020', 17892, 45, 'S', '1', '1', 'U', '0', 2002);
+insert into homes values(7006, '06-Jun-2020', 12292, 35, 'M', '0', '1', 'U', '0', 2004);
+insert into homes values(7007, '07-Jul-2020', 17792, 50, 'C', '1', '0', 'U', '0', 2008);
+insert into homes values(7008, '08-Aug-2020', 19892, 76, 'T', '0', '0', 'U', '0', 2010);
+insert into homes values(7009, '09-Sep-2020', 11392, 34, 'S', '1', '1', 'U', '1', 2002);
+insert into homes values(7010, '01-Oct-2020', 18692, 45, 'M', '0', '1', 'U', '1', 2004);
+insert into homes values(7011, '02-Nov-2020', 10992, 21, 'C', '1', '0', 'U', '1', 2008);
+
+                                                      
+                                             
 
 
 -- Oracle SQL Developer Data Modeler Summary Report: 
