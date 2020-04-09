@@ -313,6 +313,17 @@ insert into homes values(7009, '09-Sep-2020', 11392, 34, 'S', '1', '1', 'U', '1'
 insert into homes values(7010, '01-Oct-2020', 18692, 45, 'M', '0', '1', 'U', '1', 2004);
 insert into homes values(7011, '02-Nov-2020', 10992, 21, 'C', '1', '0', 'U', '1', 2008);
 
+insert into vehicle_drivers values(3001, 6002);
+insert into vehicle_drivers values(3002, 6002);
+insert into vehicle_drivers values(3003, 6001);
+insert into vehicle_drivers values(3004, 6003);
+insert into vehicle_drivers values(3005, 6005);
+insert into vehicle_drivers values(3006, 6004);
+insert into vehicle_drivers values(3007, 6005);
+insert into vehicle_drivers values(3008, 6006);
+insert into vehicle_drivers values(3009, 6007);
+insert into vehicle_drivers values(3010, 6008);
+insert into vehicle_drivers values(3011, 6010);
                                                       
                                              
 
