@@ -18,7 +18,9 @@ CREATE TABLE customer (
     c_id            NUMBER(8) NOT NULL,
     first_name      VARCHAR2(30) NOT NULL,
     last_name       VARCHAR2(30) NOT NULL,
-    address         VARCHAR2(30) NOT NULL,
+    street          VARCHAR2(30) NOT NULL,
+    state           VARCHAR2(30) NOT NULL,
+    zip             NUMBER(8) NOT NULL,
     gender          CHAR(1),
     marital_status  VARCHAR2(30) NOT NULL
 );
