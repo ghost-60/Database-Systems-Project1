@@ -9,6 +9,9 @@ CREATE TABLE auto_insurance (
     i_id NUMBER(8) NOT NULL
 );
 
+COMMENT ON COLUMN auto_insurance.i_id IS
+    'Insurance ID';
+    
 ALTER TABLE auto_insurance ADD CONSTRAINT auto_insurance_pk PRIMARY KEY ( i_id );
 
 CREATE TABLE customer (
@@ -30,11 +33,17 @@ CREATE TABLE drivers (
     birthdate       DATE NOT NULL
 );
 
+COMMENT ON COLUMN customer.c_id IS
+    'Customer ID';
+ 
 ALTER TABLE drivers ADD CONSTRAINT drivers_pk PRIMARY KEY ( d_id );
 
 CREATE TABLE home_insurance (
     i_id NUMBER(8) NOT NULL
 );
+
+COMMENT ON COLUMN home_insurance.i_id IS
+    'Insurance ID';
 
 ALTER TABLE home_insurance ADD CONSTRAINT home_insurance_pk PRIMARY KEY ( i_id );
 
@@ -51,6 +60,18 @@ CREATE TABLE homes (
     i_id                    NUMBER(8) NOT NULL
 );
 
+COMMENT ON COLUMN homes.h_id IS
+    'Home ID';
+
+COMMENT ON COLUMN homes.home_area IS
+    'AREA in meter square';
+
+COMMENT ON COLUMN homes.type IS
+    'Type of family';
+
+COMMENT ON COLUMN homes.i_id IS
+    'Insurance ID';
+
 ALTER TABLE homes ADD CONSTRAINT homes_pk PRIMARY KEY ( h_id );
 
 CREATE TABLE insurance (
@@ -63,6 +84,15 @@ CREATE TABLE insurance (
     i_status        CHAR(1) NOT NULL
 );
 
+COMMENT ON COLUMN insurance.i_id IS
+    'Insurance ID';
+
+COMMENT ON COLUMN insurance.c_id IS
+    'Customer ID';
+
+COMMENT ON COLUMN insurance.i_status IS
+    'Insurance status';
+    
 ALTER TABLE insurance ADD CONSTRAINT insurance_pk PRIMARY KEY ( i_id );
 
 CREATE TABLE invoice (
@@ -72,6 +102,15 @@ CREATE TABLE invoice (
     i_id         NUMBER(8)
 );
 
+COMMENT ON COLUMN invoice.inv_id IS
+    'Invoice ID';
+
+COMMENT ON COLUMN invoice.payment_due IS
+    'Payment Due Date';
+
+COMMENT ON COLUMN invoice.i_id IS
+    'Insurance ID';
+    
 ALTER TABLE invoice ADD CONSTRAINT invoice_pk PRIMARY KEY ( inv_id );
 
 CREATE TABLE payment (
@@ -81,6 +120,12 @@ CREATE TABLE payment (
     inv_id          NUMBER(8)
 );
 
+COMMENT ON COLUMN payment.p_id IS
+    'Payment ID';
+
+COMMENT ON COLUMN payment.inv_id IS
+    'Invoice ID';
+    
 ALTER TABLE payment ADD CONSTRAINT payment_pk PRIMARY KEY ( p_id );
 
 CREATE TABLE vehicle_drivers (
@@ -88,6 +133,12 @@ CREATE TABLE vehicle_drivers (
     d_id  NUMBER(8) NOT NULL
 );
 
+COMMENT ON COLUMN vehicle_drivers.v_in IS
+    'Vehicle Identification Number';
+
+COMMENT ON COLUMN vehicle_drivers.d_id IS
+    'Driver ID';
+    
 ALTER TABLE vehicle_drivers ADD CONSTRAINT vehicle_drivers_pk PRIMARY KEY ( v_in,
                                                                             d_id );
 
@@ -98,6 +149,18 @@ CREATE TABLE vehicles (
     i_id             NUMBER(8) NOT NULL
 );
 
+COMMENT ON COLUMN vehicles.v_in IS
+    'Vehicle Identification Number ';
+
+COMMENT ON COLUMN vehicles.make_model_year IS
+    'Year Manufactured';
+
+COMMENT ON COLUMN vehicles.v_status IS
+    'Status of Vehicle';
+
+COMMENT ON COLUMN vehicles.i_id IS
+    'Insurance ID';
+    
 ALTER TABLE vehicles ADD CONSTRAINT vehicles_pk PRIMARY KEY ( v_in );
 
 ALTER TABLE auto_insurance
