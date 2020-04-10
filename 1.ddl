@@ -225,7 +225,7 @@ insert into customer values(1011, 'KKKK', 'LLLL', 'Church', NULL, 'W');
 
 
 insert into insurance values (2001, 1001, 'A', '10-APR-2020', '25-APR-2020', 22920, 'C');
-insert into insurance values (2002, 1001, 'H', ‘10-APR-2020’, ‘25-APR-2020’, 22920, 'C');
+insert into insurance values (2002, 1001, 'H', '10-APR-2020', '25-APR-2020', 22920, 'C');
 insert into insurance values (2003, 1002, 'A', '01-APR-2020', '06-APR-2020', 12320, 'P');
 insert into insurance values (2004, 1003, 'H', '12-APR-2020', '28-APR-2020', 13220, 'C');
 insert into insurance values (2005, 1003, 'A', '07-APR-2020', '08-APR-2020', 15620, 'P');
