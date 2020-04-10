@@ -276,17 +276,17 @@ ADD CONSTRAINT CHK_payment_type CHECK (payment_method IN ('Paypal', 'Debit', 'Cr
 ALTER TABLE vehicles 
 ADD CONSTRAINT CHK_vehicle_status CHECK (v_status IN ('L', 'F', 'O'));
 
-insert into customer values(1001, 'Kumar', 'Ayush', 'Church', 'M', 'S');
-insert into customer values(1002, 'AAAA', 'BBBB', 'Church', 'F', 'S');
-insert into customer values(1003, 'BBBB', 'CCCC', 'Church', 'M', 'M');
-insert into customer values(1004, 'CCCC', 'DDDD', 'Church', 'F', 'S');
-insert into customer values(1005, 'DDDD', 'EEEE', 'Church', 'M', 'M');
-insert into customer values(1006, 'EEEE', 'FFFF', 'Church', 'F', 'S');
-insert into customer values(1007, 'FFFF', 'GGGG', 'Church', 'M', 'S');
-insert into customer values(1008, 'GGGG', 'HHHH', 'Church', 'F', 'W');
-insert into customer values(1009, 'IIII', 'JJJJ', 'Church', 'M', 'S');
-insert into customer values(1010, 'JJJJ', 'KKKK', 'Church', 'F', 'S');
-insert into customer values(1011, 'KKKK', 'LLLL', 'Church', NULL, 'W');
+insert into customer values(1001, 'Kumar', 'Ayush', 'Church', 'New York', 11218, 'M', 'S');
+insert into customer values(1002, 'AAAA', 'BBBB', 'Church', 'New York', 11218, 'F', 'S');
+insert into customer values(1003, 'BBBB', 'CCCC', 'Church', 'New York', 11218, 'M', 'M');
+insert into customer values(1004, 'CCCC', 'DDDD', 'Church', 'New York', 11218, 'F', 'S');
+insert into customer values(1005, 'DDDD', 'EEEE', 'Church', 'New York', 11218, 'M', 'M');
+insert into customer values(1006, 'EEEE', 'FFFF', 'Church', 'New York', 11218, 'F', 'S');
+insert into customer values(1007, 'FFFF', 'GGGG', 'Church', 'New York', 11218, 'M', 'S');
+insert into customer values(1008, 'GGGG', 'HHHH', 'Church', 'New York', 11218, 'F', 'W');
+insert into customer values(1009, 'IIII', 'JJJJ', 'Church', 'New York', 11218, 'M', 'S');
+insert into customer values(1010, 'JJJJ', 'KKKK', 'Church', 'New York', 11218, 'F', 'S');
+insert into customer values(1011, 'KKKK', 'LLLL', 'Church', 'New York', 11218, NULL, 'W');
 
 
 insert into insurance values (2001, 1001, 'A', '10-APR-2020', '25-APR-2020', 22920, 'C');
