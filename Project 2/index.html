@@ -25,11 +25,11 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="#">Home</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Login</a>
+				<li class="nav-item" id = "Login_button">
+					<a class="nav-link" data-toggle="modal" data-target="#exampleModal" href="#">Login</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Sign Up</a>
+					<a class="nav-link" data-toggle="modal" data-target="#exampleModal2" href="#">Sign Up</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#">Services</a>
@@ -45,8 +45,16 @@
 	</div>
 </nav>
 
+
+
+
+
+
+
+
 <!--- Image Slider -->
-<div id="slides" class="carousel slide" data-ride="carousel">
+<div id="slides" class="carousel slide" data-ride="carousel" style="z-index: -1;">
+	
 	<ul class="carousel-indicators">
 		<li data-target="#slides" data-slide-to="0" class="active"></li>
 		<li data-target="#slides" data-slide-to="1"></li>
@@ -70,6 +78,43 @@
 		</div>
 	</div>
 </div>
+
+<!--Login Modal-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		
+		<div class="modal-body">
+				<form action="" class="text-center">
+					<h2 style="color: #563d7c">Login</h2>				
+					<input type="text" placeholder="Email">
+					<input type="password" placeholer="Password">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>			
+		</div>
+	  </div>
+	</div>
+  </div>
+
+  <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+	  <div class="modal-content">
+		
+		<div class="modal-body">
+				<form action="" class="text-center">
+					<h2 style="color: #563d7c">Sign Up</h2>
+					<input type="text" placeholder="First Name">
+					<input type="text" placeholder="Last Name">				
+					<input type="text" placeholder="Email">
+					<input type="password" placeholer="Password">
+					<input type="password" placeholer="Confirm Password">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>			
+		</div>
+	  </div>
+	</div>
+  </div>
 
 <!--- Jumbotron -->
 
@@ -264,10 +309,19 @@
 
 
 
+<!-- Model Section -->
 
 
 
+<script>
+	// document.findElementById("Login_button").addEventListener('click', function() {
+	// 	document.getElementById('bg-modal').style.display = "inline";
+	// });
+	function showModall(){
+		document.getElementById('bg-modal').style.display = "inline";
+	}
 
+</script>
 
 <!--- Check out my courses! -->
 <!-- <div class="udemy-course" style="position: fixed; bottom: 0; right: 0; margin-bottom: -5px; z-index: 100;">
