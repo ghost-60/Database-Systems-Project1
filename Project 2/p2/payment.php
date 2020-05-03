@@ -15,6 +15,7 @@ require_once 'navbar.php';
 	</div>
 
     <?php
+        global $conn;
         $email = $_SESSION['email'];
         $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
         $result = mysqli_fetch_array($query);
@@ -29,12 +30,14 @@ require_once 'navbar.php';
                 $end      = $cur_date->modify('first day of next month');
                 $interval = DateInterval::createFromDateString('1 month');
                 $period   = new DatePeriod($start, $interval, $end);
-
+                
                 foreach ($period as $dt) {
                     $p_due = $dt->format("Y-m-d");
+                    $stat = "0";
                     $stmt = $conn->prepare("INSERT INTO invoice (payment_due, amount, i_id, c_id) VALUES (?, ?, ?, ?)");
-                    $stmt->bind_param("ssss", $p_due, $row['premium_amount'], $row['i_id'], $c_id);
+                    $stmt->bind_param("ssss", $p_due, $row['premium_amount'], $row['i_id'], $cid);
                     $res = $stmt->execute();
+                    //echo mysqli_error($conn);
                 }
                 $linv = date("Y-m-d", strtotime("+1 month", strtotime(date("Y-m-d"))));
                 $query = "UPDATE insurance SET last_invoice='".$linv."' WHERE i_id=".$row['i_id'];
@@ -117,12 +120,7 @@ require_once 'navbar.php';
 	</form>
 	
 
-	<?php
 	
-	
-	
-	
-	?>
 	</div>
 	</div>
 </body>

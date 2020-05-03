@@ -10,7 +10,7 @@ require_once 'navbar.php';
 	<div class="container-fluid padding">
 		<div class="row welcome text-center">
 			<div class="col-12">
-				<h1 class="display-5" style="margin-bottom: 50px">Select homes to insure</h1>
+				<h1 class="display-5" style="margin-bottom: 50px">Select vehicles to insure</h1>
 			</div>
 		</div>
 	</div>
@@ -22,7 +22,7 @@ require_once 'navbar.php';
 	
     <table class="table col-md-3 text-center">
         <tr>
-            <th >Home ID</th>
+            <th >Vehicle ID</th>
             <th ><label for="homeid">Select</label></th>
         </tr>
     <?php
@@ -30,20 +30,20 @@ require_once 'navbar.php';
         $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
         $result = mysqli_fetch_array($query);
         $cid = $result['c_id'];       
-        $homes_list_query = "SELECT * FROM homes WHERE c_id='$cid'";
+        $homes_list_query = "SELECT * FROM vehicles WHERE c_id='$cid'";
         $result = $conn->query($homes_list_query);
 		$isInsured = "0";
         if($result-> num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                $fiid = $row["h_id"];
+                $fiid = $row["v_in"];
 				$radioButton = "<input type='checkbox' name=h".$fiid." value=".$fiid.">";
 				if($row['i_id'] == "") {
-                	echo "<tr><td>". $row["h_id"] ."</td><td>". $radioButton ."</td></tr>";
+                	echo "<tr><td>". $row["v_in"] ."</td><td>". $radioButton ."</td></tr>";
 					$isInsured = "1";
 				}
             }
 			if($isInsured == "0") {
-				echo "<p style='display:inline; color:red'>" . "You have no homes registered. Please register homes that you want to insure." ."</p>";
+				echo "<p style='display:inline; color:red'>" . "You have no vehicles registered. Please register homes that you want to insure." ."</p>";
 			}
             echo "</table>";
         }
@@ -101,7 +101,7 @@ require_once 'navbar.php';
 				$query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
 				$result = mysqli_fetch_array($query);
 				$cid = $result['c_id'];       
-				$homes_list_query = "SELECT * FROM insurance WHERE c_id='$cid' and insurance_type='H'";
+				$homes_list_query = "SELECT * FROM insurance WHERE c_id='$cid' and insurance_type='A'";
 				$result = $conn->query($homes_list_query);
 				if($result-> num_rows > 0) {
 					while($row = $result->fetch_assoc()) {
@@ -132,29 +132,34 @@ require_once 'navbar.php';
         $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
         $result = mysqli_fetch_array($query);
         $cid = $result['c_id'];
-		$homes_list_query = "SELECT * FROM homes WHERE c_id='$cid'";
+		$homes_list_query = "SELECT * FROM vehicles WHERE c_id='$cid'";
         $result = $conn->query($homes_list_query);
-		$insurance_type = "H";
+		$insurance_type = "A";
 		$start_date = date("Y-m-d");
 		$end_date = date('Y-m-d', strtotime('+'.$plan.' years'));
-		$p_amount = "1000";
+		$p_amount = "100000";
 		if($result-> num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-				if($row['i_id'] == "" and isset($_POST["h".$row['h_id']])) {
-                	$p_amount += $row['purchase_value'] / $plan;
+				if($row['i_id'] == "" and isset($_POST["h".$row['v_in']])) {
+                    $date1 = $row['make_model_year'];
+                    $date2 = date('Y-m-d');
+                    $diff = abs(strtotime($date2) - strtotime($date1));
+                    $years = floor($diff / (365*60*60*24));
+                	$p_amount += $p_amount / $years;
 				}
             }
         }
 		$result = $conn->query($homes_list_query);
 		$istatus = "C";
+        echo $start_date;
 		$stmt = $conn->prepare("INSERT INTO insurance (c_id, insurance_type, insurance_plan, start_date, end_date, premium_amount, i_status, last_invoice) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 		$stmt->bind_param("ssssssss", $cid, $insurance_type, $plan, $start_date, $end_date, $p_amount, $istatus, $start_date);
     	$res = $stmt->execute();
 		$i_id = $conn->insert_id;
 		if($result-> num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-				if($row['i_id'] == "" and isset($_POST["h".$row['h_id']])) {
-					$query = "UPDATE homes SET i_id=".$i_id." WHERE h_id=".$row['h_id'];
+				if($row['i_id'] == "" and isset($_POST["h".$row['v_in']])) {
+					$query = "UPDATE vehicles SET i_id=".$i_id." WHERE v_in=".$row['v_in'];
                 	$stmt = $conn->prepare($query);
 					$res = $stmt->execute();
 				}
@@ -173,16 +178,20 @@ require_once 'navbar.php';
         $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
         $result = mysqli_fetch_array($query);
         $cid = $result['c_id'];
-		$homes_list_query = "SELECT * FROM homes WHERE c_id='$cid'";
+		$homes_list_query = "SELECT * FROM vehicles WHERE c_id='$cid'";
         $result = $conn->query($homes_list_query);
 		
 		if($result-> num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-				if($row['i_id'] == "" and isset($_POST["h".$row['h_id']])) {
-					$query = "UPDATE homes SET i_id=".$plan." WHERE h_id=".$row['h_id'];
+				if($row['i_id'] == "" and isset($_POST["h".$row['v_in']])) {
+					$query = "UPDATE vehicles SET i_id=".$plan." WHERE v_in=".$row['v_in'];
                 	$stmt = $conn->prepare($query);
 					$res = $stmt->execute();
-					$add_amount += $row['purchase_value'] / $in_plan;
+                    $date1 = $row['make_model_year'];
+                    $date2 = date('Y-m-d');
+                    $diff = abs(strtotime($date2) - strtotime($date1));
+                    $years = floor($diff / (365*60*60*24));
+					$add_amount += "100000" / $years;
 				}
             }
 			$query = "UPDATE insurance SET premium_amount=".$add_amount." WHERE i_id=".$plan;

@@ -71,16 +71,16 @@ if(!isset($_SESSION['email'])){
                         Insurance</a>
                     <ul class="collapse list-unstyled" id="autoSubmenu">
                         <li>
-                            <a href="#">Current Insurance</a>
+                            <a href="ainsurance_1.php">Current Insurance</a>
                         </li>
                         <li>
-                            <a href="#">Buy Insurance</a>
+                            <a href="ainsurance_2.php">Buy Insurance</a>
                         </li>
                         <li>
-                            <a href="#">Register Vehicles</a>
+                            <a href="ainsurance_3.php">Register Vehicles</a>
                         </li>
                         <li>
-                            <a href="#">Register Drivers</a>
+                            <a href="ainsurance_4.php">Register Drivers</a>
                         </li>
                     </ul>
                 </li>
