@@ -20,11 +20,13 @@ require_once 'navbar.php';
 
 <div class="row justify-content-center" style="margin-top: 15px;">
 	
-    <table class="table col-md-3 text-center">
+    <table class="table col-md-3 text-center table-striped">
+		<thead class="thead-dark ">
         <tr>
             <th >Home ID</th>
-            <th ><label for="homeid">Select</label></th>
+            <th >Select</th>
         </tr>
+		</thead>
     <?php
         $email = $_SESSION['email'];
         $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
@@ -89,13 +91,15 @@ require_once 'navbar.php';
 		</div>
 
 		<div class="row justify-content-center" style="margin-top: 15px;">
-			<table class="table col-md-11 text-center">
+			<table class="table col-md-11 text-center table-striped">
+				<thead class="thead-dark">
 				<tr>
 					<th >Insurance ID</th>
 					<th >Insurance Plan</th>
 					<th>Payable amount per Month</th>
 					<th> Select </th>
 				</tr>
+				</thead>
 			<?php
 				$email = $_SESSION['email'];
 				$query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");

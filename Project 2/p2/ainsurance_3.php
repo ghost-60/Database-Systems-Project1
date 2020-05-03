@@ -21,7 +21,8 @@ require_once 'navbar.php';
 	</div>
     
     <div class="row justify-content-center" style="margin-top: 15px;">
-    <table class="table col-md-11 text-center">
+    <table class="table col-md-11 text-center table-striped">
+        <thead class="thead-dark">
         <tr>
             <th>Vehicle ID</th>
             <th>Insurance ID</th>
@@ -29,6 +30,7 @@ require_once 'navbar.php';
             <th>Manufactured Date (YYYY-MM-DD)</th>
             <th>Status</th>
         </tr>
+        </thead>
     <?php
         $email = $_SESSION['email'];
         $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");

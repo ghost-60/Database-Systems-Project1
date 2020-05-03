@@ -91,7 +91,7 @@ if(!isset($_SESSION['email'])){
                     <a href="#">Analytics</a>
                 </li>
                 <li>
-                    <a href="#">Profile</a>
+                    <a href="profile.php">Profile</a>
                 </li>
                 <li>
                     <a href="logout.php">Logout</a>

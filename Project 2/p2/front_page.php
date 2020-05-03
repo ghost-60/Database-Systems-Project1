@@ -231,7 +231,7 @@ if(isset($_SESSION['email'])){
 						<div class="radio col-md-6 text-left">
 							Single:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="ms" value="S">
 							Married:<input type="radio" style="margin-left:3px; margin-top:6px;" name="ms" value="M">
-							Widow:<input type="radio" style="margin-left:3px; margin-top:6px;" name="ms" value="W">
+							Widow/Widower:<input type="radio" style="margin-left:3px; margin-top:6px;" name="ms" value="W">
 						</div>
 					</div>
 					<input type="submit" class="btn btn-primary" value="Register" name="registerButton"></input>

@@ -15,7 +15,8 @@ require_once 'navbar.php';
 	</div>
 	<form action="" method="POST">
 	<div class="row justify-content-center" style="margin-top: 15px;">
-    <table class="table col-md-11 text-center">
+    <table class="table col-md-11 text-center table-striped">
+        <thead class="thead-dark">
         <tr>
 			<th >Insurance ID</th>
             <th >Insurance Plan</th>
@@ -24,6 +25,7 @@ require_once 'navbar.php';
 			<th >Valid Till (YYYY-MM-DD)</th>
             <th>Payable amount per Month</th>
         </tr>
+        </thead>
     <?php
         $email = $_SESSION['email'];
         $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");

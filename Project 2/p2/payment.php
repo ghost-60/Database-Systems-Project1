@@ -50,7 +50,8 @@ require_once 'navbar.php';
 
 	<form action="" method="POST">
 	<div class="row justify-content-center" style="margin-top: 15px;">
-    <table class="table col-md-11 text-center">
+    <table class="table col-md-11 text-center table-striped">
+        <thead class="thead-dark">
         <tr>
 			<th>Invoice ID</th>
             <th>Insurance ID</th>
@@ -59,6 +60,7 @@ require_once 'navbar.php';
 			<th >Status</th>
 			<th> Select </th>
         </tr>
+        </thead>
     <?php
         $email = $_SESSION['email'];
         $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
