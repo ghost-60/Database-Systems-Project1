@@ -45,13 +45,13 @@ if(!isset($_SESSION['email'])){
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <a class="navbar-brand" href="customer.php"><img src="img/logo.png"></a>
+                <a class="navbar-brand" href="customer.php"><img src="img/logo.png" width="50%" height="50%"></a>
             </div>
             <ul class="list-unstyled components">
                 <li>
                     <a href="customer.php">Dashboard</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home Insurance</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
@@ -81,6 +81,9 @@ if(!isset($_SESSION['email'])){
                         </li>
                         <li>
                             <a href="ainsurance_4.php">Register Drivers</a>
+                        </li>
+                        <li>
+                            <a href="ainsurance_5.php">Assign Drivers</a>
                         </li>
                     </ul>
                 </li>

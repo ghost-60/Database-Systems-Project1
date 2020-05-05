@@ -31,8 +31,12 @@ html, body {
 }
 .carousel-caption {
   position: absolute;
-  top: 50%;
+  top: 60%;
   transform: translateY(-50%);
+  text-shadow: 2px 2px 4px black,
+  2px -2px 0 #000,
+  -2px 2px 0 #000,
+  2px 2px 0 #000;
 }
 
 .carousel-caption h1 {

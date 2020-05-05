@@ -16,10 +16,7 @@ require_once 'navbar.php';
 
     <?php
         global $conn;
-        $email = $_SESSION['email'];
-        $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-        $result = mysqli_fetch_array($query);
-        $cid = $result['c_id'];
+        $cid = $_SESSION['c_id'];
         $insurance_query = "SELECT * FROM insurance WHERE c_id='$cid'";
         $result = $conn->query($insurance_query);
         if($result-> num_rows > 0) {
@@ -51,7 +48,7 @@ require_once 'navbar.php';
 	<form action="" method="POST">
 	<div class="row justify-content-center" style="margin-top: 15px;">
     <table class="table col-md-11 text-center table-striped">
-        <thead class="thead-dark">
+        <thead class="text-white bg-success">
         <tr>
 			<th>Invoice ID</th>
             <th>Insurance ID</th>
@@ -62,10 +59,7 @@ require_once 'navbar.php';
         </tr>
         </thead>
     <?php
-        $email = $_SESSION['email'];
-        $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-        $result = mysqli_fetch_array($query);
-        $cid = $result['c_id'];       
+        $cid = $_SESSION['c_id'];       
         $invoice_query = "SELECT * FROM invoice WHERE c_id='$cid'";
         $result = $conn->query($invoice_query);
 		$counter = 1;
@@ -117,7 +111,7 @@ require_once 'navbar.php';
 
 
     <div class="row justify-content-center" style="margin-top: 15px;">
-		<input type="submit" class="btn btn-primary" value="Pay selected" name="submitButton2"></input>
+		<input type="submit" class="btn btn-success" value="Pay selected" name="submitButton2"></input>
 	</div>
 	</form>
 	

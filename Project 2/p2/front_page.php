@@ -28,7 +28,7 @@ if(isset($_SESSION['email'])){
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="#"><img src="img/logo.png"></a>
+		<a class="navbar-brand" href="#"><img src="img/logo2.png" width="20%" height="20%"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -67,7 +67,7 @@ if(isset($_SESSION['email'])){
 
 
 <!--- Image Slider -->
-<div id="slides" class="carousel slide" data-ride="carousel" style="z-index: -1;">
+<div id="slides" class="carousel slide" data-ride="carousel">
 	
 	<ul class="carousel-indicators">
 		<li data-target="#slides" data-slide-to="0" class="active"></li>
@@ -76,19 +76,32 @@ if(isset($_SESSION['email'])){
 	</ul>
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-			<img src="img/background.png">
+			<img src="img/bg.png">
 			<div class="carousel-caption">
 				<h1 class="display-2">We Do Secure</h1>
-				<h3>Complete website layout</h3>
-				<button type="button" class="btn btn-outline-light btn-lg">View Services</button>
-				<button type="button" class="btn btn-primary btn-lg">Register Today</button>
+				<h3>Insurance professional right in your neighborhood.</h3>
+				<!-- <button type="button" class="btn btn-outline-light btn-lg">View Services</button> -->
+				<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal2" >Register Today</button>
 			</div>
 		</div>
 		<div class="carousel-item">
 			<img src="img/background2.png">
+			<div class="carousel-caption">
+				<h1 class="display-2">Reliable</h1>
+				<h3 >70 years of treasuring the trust of people</h3>
+				<!-- <button type="button" class="btn btn-outline-light btn-lg">View Services</button> -->
+				<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal2" >Register Today</button>
+			</div>
 		</div>
 		<div class="carousel-item">
 			<img src="img/background3.png">
+			<div class="carousel-caption">
+							<h1 class="display-2">Access anywhere</h1>
+
+				<h3>Every essential service right at your fingertips</h3>
+				<!-- <button type="button" class="btn btn-outline-light btn-lg">View Services</button> -->
+				<button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal2" >Register Today</button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -242,20 +255,7 @@ if(isset($_SESSION['email'])){
 	</div>
   </div>
 
-<!--- Jumbotron -->
 
-<div class="container-fluid">
-	<div class="row jumbotron">
-		<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 col-xl-10">
-			<p class="lead">
-				asdhadskjlaskjlaskaskadskkjsaskjkjasdakhaskjsakjsaj sakjasjkasj sakjjasjhkaskas
-			</p>
-		</div>
-		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 col-xl-2">
-			<a href="#"><button type="button" class="btn btn-outline-secondary btn-lg">HMmmm</button></a>
-		</div>
-	</div>
-</div>
 <!--- Welcome Section -->
 <div class="container-fluid padding">
 	<div class="row welcome text-center">
@@ -362,27 +362,7 @@ if(isset($_SESSION['email'])){
 		</div>
 	</div>
 </div>
-<!--- Two Column Section -->
-<div class="container-fluid padding">
-	<div class="row padding">
-		<div class="col-md-12 col-lg-6">
-			<h2>Our philosophy</h2>
-			<p>
-				sadasdsadsa
-			</p>
-			<p>
-				sadsasadsa
-			</p>
-			<p>
-				saassaadsas
-			</p>
-			<br>
-		</div>
-		<div class="col-lg-6">
-			<img src="img/bootstrap2.png" class="img-fluid">
-		</div>
-	</div>
-</div>
+
 <hr class="my-4">
 
 <!--- Connect -->
@@ -405,7 +385,7 @@ if(isset($_SESSION['email'])){
 	<div class="container-fluid padding" id="footerand">
 		<div class="row text-center">
 			<div class="col-md-6">
-				<img src="img/w3newbie.png">
+				<img src="img/logo.png" width="20%" height="20%">
 				<hr class="light">
 				<p>999-999-9999</p>
 				<p>email@email.blah.blah</p>
@@ -491,7 +471,10 @@ if(isset($_SESSION['email'])){
 			echo "<script>alert('Invalid credentials');</script>";
         }
         else{
-          $_SESSION['email'] = $email;
+		$query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
+        $result = mysqli_fetch_array($query);
+		  $_SESSION['c_id'] = $result['c_id'];
+		  $_SESSION['email'] = $email;
           echo "
           <script> 
             window.location.replace('customer.php');
@@ -539,6 +522,9 @@ if(isset($_SESSION['email'])){
         //   $errorMsg = "Successfully registered! <br> Log in using your Credentials!";
         //   $alert_class = "alert alert-success";
         //   echo "<script>alert('success');</script>";
+		$query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
+        $result = mysqli_fetch_array($query);
+		$_SESSION['c_id'] = $result['c_id'];
 		$_SESSION['email'] = $email;
           echo "
           <script> 

@@ -19,23 +19,21 @@ require_once 'navbar.php';
 			</div>
 		</div>
 	</div>
-    
+    <form method="POST" action="" class="text-left">
     <div class="row justify-content-center" style="margin-top: 15px;">
     <table class="table col-md-11 text-center table-striped">
-        <thead class="thead-dark">
+        <thead class="text-white bg-info">
         <tr>
             <th>Vehicle ID</th>
             <th>Insurance ID</th>
             <th>License Number</th>
             <th>Manufactured Date (YYYY-MM-DD)</th>
             <th>Status</th>
+            <th>Select</th>
         </tr>
         </thead>
     <?php
-        $email = $_SESSION['email'];
-        $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-        $result = mysqli_fetch_array($query);
-        $cid = $result['c_id'];       
+        $cid = $_SESSION['c_id'];       
         $homes_list_query = "SELECT * FROM vehicles WHERE c_id='$cid'";
         $result = $conn->query($homes_list_query);
         if($result-> num_rows > 0) {
@@ -60,16 +58,21 @@ require_once 'navbar.php';
                 } else {
                     $fstatus = "Owned";
                 }
-                echo "<tr><td>". $row["v_in"] ."</td><td>". $fiid ."</td><td>". $row["License"] ."</td><td>". $row["make_model_year"] ."</td><td>". $fstatus ."</td></tr>";
+                $radioButton = "<input type='checkbox' name=v".$row['v_in']." value=".$row['v_in'].">";
+                if($row['i_id'] != NULL) {
+                    $radioButton = "<input type='checkbox' name=v".$row['v_in']." value=".$row['v_in']." disabled>";
+                }
+                echo "<tr><td>". $row["v_in"] ."</td><td>". $fiid ."</td><td>". $row["License"] ."</td><td>". $row["make_model_year"] ."</td><td>". $fstatus ."</td><td>".$radioButton."</td></tr>";
             }
             echo "</table>";
         }
     ?>
     
     </table>
+    <input type="submit" class="btn btn-success" value="Delete Selected" name="submitButton2" style="margin-top: 20px;"></input>
     </div>
-
-
+    </form>
+    <hr class="my-4"></hr>
     <h3 style="margin-left:125px; margin-top: 20px; margin-bottom: 40px;"> Add another vehicle </h3>
     <form method="POST" action="" class="text-left">
                 <div class="row">
@@ -78,7 +81,7 @@ require_once 'navbar.php';
                         <label for="pdate" style="margin-top:5px;">Make Model Year</label>
                     </div>
                     <div class="col-md-3 text-left">
-                        <input type="date" class="form-control" name="pdate" id="pdate">
+                        <input type="date" class="form-control" name="pdate" id="pdate" required>
                     </div>
                 </div>
 
@@ -88,7 +91,7 @@ require_once 'navbar.php';
                         <label for="pvalue" style="margin-top:5px;">License number:</label>
                     </div>
                     <div class="col-md-3 text-left">
-                        <input type="text" class="form-control" name="pvalue" id="pvalue">
+                        <input type="text" class="form-control" name="pvalue" id="pvalue" required>
                     </div>
                 </div>
 
@@ -99,13 +102,13 @@ require_once 'navbar.php';
                         <label for="type" style="margin-top:5px;">Type:</label>
                     </div>
                     <div class="radio col-md-7 text-left">
-                        Leased:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="L">
+                        Leased:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="L" required>
                         Financed:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="F">
                         Owned:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="O">
                     </div>
                 </div>
                 
-                <input type="submit" class="btn btn-primary" value="Submit" name="submitButton" style="margin-left:125px; margin-top: 20px;"></input>
+                <input type="submit" class="btn btn-success" value="Submit" name="submitButton" style="margin-left:125px; margin-top: 20px;"></input>
             </form>
 
 
@@ -120,17 +123,10 @@ require_once 'navbar.php';
 
 function register($mmy, $license, $vtype) {
     global $conn;
-    $email = $_SESSION['email'];
-    $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-	$result = mysqli_fetch_array($query);
-    $cid = $result['c_id'];
-
+    $cid = $_SESSION['c_id'];
     $stmt = $conn->prepare("INSERT INTO vehicles (make_model_year, License, v_status, c_id) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $mmy, $license, $vtype, $cid);
     $res = $stmt->execute();
-    //echo "<script>alert('error: ".mysqli_error($conn)."');</script>";
-    //echo mysqli_error($conn);
-    // echo $conn->insert_id;
     if($res) {
         return 1;
     } else {
@@ -138,6 +134,45 @@ function register($mmy, $license, $vtype) {
     }
 }
 
+function deleteV() {
+    global $conn;
+    $cid = $_SESSION['c_id'];      
+    $homes_list_query = "SELECT * FROM vehicles WHERE c_id='$cid'";
+    $result = $conn->query($homes_list_query);
+    if($result-> num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $cb = "v".$row['v_in'];
+            if(isset($_POST[$cb])) {
+                $query = "DELETE FROM vehicles where v_in=".$row['v_in'];
+                $stmt = $conn->prepare($query);
+				$res = $stmt->execute();
+                $query = "DELETE FROM vehicle_drivers where v_in=".$row['v_in'];
+                $stmt = $conn->prepare($query);
+				$res = $stmt->execute();
+            }
+        }
+        return $res;
+    }
+
+}
+if(isset($_POST["submitButton2"])){
+$status = deleteV();
+if($status == 1) {
+    echo "
+          <script> 
+            window.location.replace('ainsurance_3.php');
+            alert('Successfull');
+          </script>
+          ";
+} else {
+    echo "
+          <script> 
+            window.location.replace('ainsurance_3.php');
+            alert('Failed');
+          </script>
+          ";
+}
+}
 if(isset($_POST["submitButton"])){
 $mmy = $_POST['pdate'];
 $license = $_POST['pvalue'];
@@ -145,9 +180,19 @@ $vtype = $_POST['type'];
 
 $status = register($mmy, $license, $vtype);
 if($status == 1) {
-    echo "<script>alert('Successfull');</script>";
+    echo "
+          <script> 
+            window.location.replace('ainsurance_3.php');
+            alert('Successfull');
+          </script>
+          ";
 } else {
-    echo "<script>alert('Failed');</script>";
+    echo "
+          <script> 
+            window.location.replace('ainsurance_3.php');
+            alert('Failed');
+          </script>
+          ";
 }
 }
 

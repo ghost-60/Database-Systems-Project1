@@ -16,7 +16,7 @@ require_once 'navbar.php';
 	<form action="" method="POST">
 	<div class="row justify-content-center" style="margin-top: 15px;">
     <table class="table col-md-11 text-center table-striped">
-		<thead class="thead-dark">
+		<thead class="text-white bg-info">
         <tr>
 			<th >Insurance ID</th>
             <th >Insurance Plan</th>
@@ -24,13 +24,11 @@ require_once 'navbar.php';
             <th>Purchase Date (YYYY-MM-DD)</th>
 			<th >Valid Till (YYYY-MM-DD)</th>
             <th>Payable amount per Month</th>
+            <th>Select</th>
         </tr>
 		</thead>
     <?php
-        $email = $_SESSION['email'];
-        $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-        $result = mysqli_fetch_array($query);
-        $cid = $result['c_id'];       
+        $cid = $_SESSION['c_id'];       
         $homes_list_query = "SELECT * FROM insurance WHERE c_id='$cid' and insurance_type='H'";
         $result = $conn->query($homes_list_query);
 		$counter = 1;
@@ -43,8 +41,9 @@ require_once 'navbar.php';
                 } else {
                     $fpool = "Expired";
                 }
+                $radioButton = "<input type='checkbox' name=i".$row['i_id']." value=".$row['i_id'].">";
                 echo "<tr><td>". $row["i_id"] ."</td><td>". $fplan ."</td><td>". $fpool ."</td><td>". $row["start_date"] ."</td><td>". $row["end_date"] ."</td><td>"
-				. $row["premium_amount"] ."</td></tr>";
+				. $row["premium_amount"] ."</td><td>".$radioButton."</td></tr>";
 				$counter += 1;
             }
             echo "</table>";
@@ -52,14 +51,51 @@ require_once 'navbar.php';
     ?>
     
     </table>
+        <input type="submit" class="btn btn-success" value="Cancel Selected" name="submitButton" style="margin-top: 20px;"></input>
+
     </div>
 	</form>
 	
 
 	<?php
-	
-	
-	
+
+    function deleteV() {
+        global $conn;
+        $cid = $_SESSION['c_id'];       
+        $homes_list_query = "SELECT * FROM insurance WHERE c_id='$cid' and insurance_type='H'";
+        $result = $conn->query($homes_list_query);
+        while($row = $result->fetch_assoc()) {
+            $cb = "i".$row['i_id'];
+            if(isset($_POST[$cb])) {
+                $query = "DELETE FROM insurance where i_id=".$row['i_id'];
+                $stmt = $conn->prepare($query);
+                $res = $stmt->execute();
+                $query = "UPDATE homes SET i_id=NULL where i_id=".$row['i_id'];
+                $stmt = $conn->prepare($query);
+                $res = $stmt->execute();
+            }
+        }
+        return $res;
+    }
+
+	if(isset($_POST["submitButton"])){
+    $status = deleteV();
+    if($status == 1) {
+        echo "
+            <script> 
+                window.location.replace('hinsurance_1.php');
+                alert('Successfull');
+            </script>
+            ";
+    } else {
+        echo "
+            <script> 
+                window.location.replace('hinsurance_1.php');
+                alert('Failed');
+            </script>
+            ";
+    }
+    }
 	
 	?>
 	</div>

@@ -1,15 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');
-/* 
-table {
-    border-collapse: collapse;
-    width: 85%;
-    color: #d96459;
-    font-family: monospace;
-    font-size: 16px;
-    text-align: left;
-}
- th {
-     background-color: #d96459;
-     color: white;
+
+ .sec {
+     display: inline-block;
  }
- tr:nth-child(even) {background-color: #f2f2f2; } */
+
+ header {
+     border-bottom: 1px solid #000;
+ }
+
+h3 {
+     display: inline-block;
+ }
+
+span {
+     margin-left: 100px;
+ }
+ #parent {
+     list-style: none;
+     width: 100%;
+     height: 90px;
+     margin: 0;
+     padding: 0;
+     white-space: nowrap;
+     overflow-x: auto;
+     overflow-y: hidden;
+ }
+
+ #parent>li {
+     display: inline-block;
+     width: 50%;
+     height: 100%;
+     background-color: red;
+ }
+
+ #parent>li:nth-child(even) {
+     background-color: blue;
+ }

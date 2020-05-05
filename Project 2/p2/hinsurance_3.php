@@ -19,10 +19,11 @@ require_once 'navbar.php';
 			</div>
 		</div>
 	</div>
-    
+
+    <form method="POST" action="" class="text-left">
     <div class="row justify-content-center" style="margin-top: 15px;">
     <table class="table col-md-11 text-center table-striped">
-        <thead class="thead-dark">
+        <thead class="text-white bg-info">
         <tr>
             <th >Home ID</th>
             <th >Insurance ID</th>
@@ -34,13 +35,11 @@ require_once 'navbar.php';
             <th>Home Security System</th>
             <th>Swimming Pool</th>
             <th>Basement</th>
+            <th>Select</th>
         </tr>
         </thead>
     <?php
-        $email = $_SESSION['email'];
-        $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-        $result = mysqli_fetch_array($query);
-        $cid = $result['c_id'];       
+        $cid = $_SESSION['c_id'];       
         $homes_list_query = "SELECT * FROM homes WHERE c_id='$cid'";
         $result = $conn->query($homes_list_query);
         if($result-> num_rows > 0) {
@@ -73,14 +72,25 @@ require_once 'navbar.php';
                 } else {
                     $fiid = $row["i_id"];
                 }
-                echo "<tr><td>". $row["h_id"] ."</td><td>". $fiid ."</td><td>". $row["purchase_date"] ."</td><td>". $row["purchase_value"] ."</td><td>". $row["home_area"] ."</td><td>". $ftype ."</td><td>". $row["auto_fire_notification"] ."</td><td>". $row["home_security_system"] ."</td><td>". $fpool ."</td><td>". $row["basement"] ."</td></tr>";
+                $radioButton = "<input type='checkbox' name=h".$row['h_id']." value=".$row['h_id'].">";
+                if($row['i_id'] != NULL) {
+                    $radioButton = "<input type='checkbox' name=h".$row['h_id']." value=".$row['h_id']." disabled>";
+                }
+                echo "<tr><td>". $row["h_id"] ."</td><td>". $fiid ."</td><td>". $row["purchase_date"] ."</td><td>". 
+                $row["purchase_value"] ."</td><td>". $row["home_area"] ."</td><td>". $ftype ."</td><td>". 
+                $row["auto_fire_notification"] ."</td><td>". $row["home_security_system"] ."</td><td>". 
+                $fpool ."</td><td>". $row["basement"] ."</td><td>".$radioButton."</td></tr>";
             }
             echo "</table>";
         }
     ?>
     
     </table>
+    <input type="submit" class="btn btn-success" value="Delete Selected" name="submitButton2" style="margin-top: 20px;"></input>
+
     </div>
+    </form>
+    	<hr class="my-4"></hr>
 
 
     <h3 style="margin-left:125px; margin-top: 20px; margin-bottom: 40px;"> Add another Home </h3>
@@ -91,7 +101,7 @@ require_once 'navbar.php';
                         <label for="pdate" style="margin-top:5px;">Purchase Date:</label>
                     </div>
                     <div class="col-md-3 text-left">
-                        <input type="date" class="form-control" name="pdate" id="pdate">
+                        <input type="date" class="form-control" name="pdate" id="pdate" required>
                     </div>
                 </div>
 
@@ -101,7 +111,7 @@ require_once 'navbar.php';
                         <label for="pvalue" style="margin-top:5px;">Purchase Value ($):</label>
                     </div>
                     <div class="col-md-3 text-left">
-                        <input type="number" class="form-control" name="pvalue" id="pvalue">
+                        <input type="number" class="form-control" name="pvalue" id="pvalue" required>
                     </div>
                 </div>
 
@@ -111,7 +121,7 @@ require_once 'navbar.php';
                         <label for="area" style="margin-top:5px;">Area (in sq. meter)</label>
                     </div>
                     <div class="col-md-3 text-left">
-                        <input type="number" step="0.01" class="form-control" name="area" id="area">
+                        <input type="number" step="0.01" class="form-control" name="area" id="area" required>
                     </div>
                 </div>
                 <div class="row" style="margin-top:10px;">
@@ -120,7 +130,7 @@ require_once 'navbar.php';
                         <label for="type" style="margin-top:5px;">Type:</label>
                     </div>
                     <div class="radio col-md-7 text-left">
-                        Single Family:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="S">
+                        Single Family:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="S" required>
                         Multi Family:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="M">
                         Condominium:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="C">
                         Town house:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="T">
@@ -132,7 +142,7 @@ require_once 'navbar.php';
                         <label for="afn" style="margin-top:5px;">Auto Fire Notification:</label>
                     </div>
                     <div class="radio col-md-7 text-left">
-                        Yes:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="afn" value="1">
+                        Yes:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="afn" value="1" required>
                         No:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="afn" value="0">
                     </div>
                 </div>
@@ -142,7 +152,7 @@ require_once 'navbar.php';
                         <label for="hss" style="margin-top:5px;">Home Security System:</label>
                     </div>
                     <div class="radio col-md-7 text-left">
-                        Yes:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="hss" value="1">
+                        Yes:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="hss" value="1" required>
                         No:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="hss" value="0">
                     </div>
                 </div>
@@ -152,7 +162,7 @@ require_once 'navbar.php';
                         <label for="pool" style="margin-top:5px;">Swimming Pool:</label>
                     </div>
                     <div class="radio col-md-7 text-left">
-                        Underground:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="pool" value="U">
+                        Underground:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="pool" value="U" required>
                         Overground:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="pool" value="O">
                         Indoor:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="pool" value="I">
                         Multiple:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="pool" value="M">
@@ -165,11 +175,11 @@ require_once 'navbar.php';
                         <label for="basement" style="margin-top:5px;">Basement:</label>
                     </div>
                     <div class="radio col-md-7 text-left">
-                        Yes:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="basement" value="1">
+                        Yes:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="basement" value="1" required>
                         No:<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="basement" value="0">
                     </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Submit" name="submitButton" style="margin-left:125px; margin-top: 20px;"></input>
+                <input type="submit" class="btn btn-success" value="Submit" name="submitButton" style="margin-left:125px; margin-top: 20px;"></input>
             </form>
 
 
@@ -181,13 +191,27 @@ require_once 'navbar.php';
 </html>
 
 <?php
+function deleteV() {
+    global $conn;
+    $cid = $_SESSION['c_id'];       
+    $homes_list_query = "SELECT * FROM homes WHERE c_id='$cid'";
+    $result = $conn->query($homes_list_query);
+    if($result-> num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $cb = "h".$row['h_id'];
+            if(isset($_POST[$cb])) {
+                $query = "DELETE FROM homes where h_id=".$row['h_id'];
+                $stmt = $conn->prepare($query);
+				$res = $stmt->execute();
+            }
+        }
+        return $res;
+    }
+}
 
 function register($pdate, $pvalue, $area, $type, $afn, $hss, $pool, $basement) {
     global $conn;
-    $email = $_SESSION['email'];
-    $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-	$result = mysqli_fetch_array($query);
-    $cid = $result['c_id'];
+    $cid = $_SESSION['c_id'];
 
     $stmt = $conn->prepare("INSERT INTO homes (purchase_date, purchase_value, home_area, type, auto_fire_notification, home_security_system, swimming_pool, basement, c_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssssss", $pdate, $pvalue, $area, $type, $afn, $hss, $pool, $basement, $cid);
@@ -201,7 +225,24 @@ function register($pdate, $pvalue, $area, $type, $afn, $hss, $pool, $basement) {
         return 0;
     }
 }
-
+if(isset($_POST["submitButton2"])){
+$status = deleteV();
+if($status == 1) {
+    echo "
+          <script> 
+            window.location.replace('hinsurance_3.php');
+            alert('Successfull');
+          </script>
+          ";
+} else {
+    echo "
+          <script> 
+            window.location.replace('hinsurance_3.php');
+            alert('Failed');
+          </script>
+          ";
+}
+}
 if(isset($_POST["submitButton"])){
 $pdate = $_POST['pdate'];
 $pvalue = $_POST['pvalue'];
@@ -214,10 +255,20 @@ $basement = $_POST['basement'];
 
 $status = register($pdate, $pvalue, $area, $type, $afn, $hss, $pool, $basement);
 if($status == 1) {
-    echo "<script>alert('Successfull');</script>";
-} else {
-    echo "<script>alert('Failed');</script>";
-}
+echo "
+          <script> 
+            window.location.replace('hinsurance_3.php');
+            alert('Successful');
+          </script>
+          ";
+          } else {
+echo "
+          <script> 
+            window.location.replace('hinsurance_3.php');
+            alert('Failed');
+          </script>
+          ";
+          }
 }
 
 

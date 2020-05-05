@@ -21,17 +21,14 @@ require_once 'navbar.php';
 <div class="row justify-content-center" style="margin-top: 15px;">
 	
     <table class="table col-md-3 text-center table-striped">
-        <thead class="thead-dark">
+        <thead class="text-white bg-info">
         <tr>
             <th >Vehicle ID</th>
             <th >Select</th>
         </tr>
         </thead>
     <?php
-        $email = $_SESSION['email'];
-        $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-        $result = mysqli_fetch_array($query);
-        $cid = $result['c_id'];       
+        $cid = $_SESSION['c_id'];       
         $homes_list_query = "SELECT * FROM vehicles WHERE c_id='$cid'";
         $result = $conn->query($homes_list_query);
 		$isInsured = "0";
@@ -39,35 +36,39 @@ require_once 'navbar.php';
             while($row = $result->fetch_assoc()) {
                 $fiid = $row["v_in"];
 				$radioButton = "<input type='checkbox' name=h".$fiid." value=".$fiid.">";
-				if($row['i_id'] == "") {
+				$driver_list_query = "SELECT * FROM vehicle_drivers WHERE c_id='$cid' and v_in='$fiid'";
+       			$dres = $conn->query($driver_list_query);
+				if($row['i_id'] == "" and $dres-> num_rows > 0) {
                 	echo "<tr><td>". $row["v_in"] ."</td><td>". $radioButton ."</td></tr>";
 					$isInsured = "1";
 				}
             }
-			if($isInsured == "0") {
-				echo "<p style='display:inline; color:red'>" . "You have no vehicles registered. Please register homes that you want to insure." ."</p>";
-			}
-            echo "</table>";
+			// echo "</table>";
         }
-    ?>  
-    </table>
-	 </div>
+		echo "</table>";
+		echo "</div>";
+		if($isInsured == "0") {
+			echo "<div class='row justify-content-center' style='color:red; margin-top:20px;'>You have no vehicles registered.</div>";
+		}
+    ?>
+
 	<hr class="my-4"></hr>
 	
 	<div class="container-fluid padding">
-		<div class="row welcome text-center">
-			<div class="col-12">
+		<div class="row welcome text-center justify-content-center">
+			<div class="col-md-5">
 				<h4 class="display-5" style="margin-bottom: 30px">Buy a new insurance</h4>
+			</div>
+            <div class="col-md-5">
+				<h4 class="display-5" style="margin-bottom: 30px">Add to an existing insurance</h4>
 			</div>
 		</div>
 	</div>
    
-<!-- </form>
-	<h3 style="margin-left:20px; margin-top: 20px; margin-bottom: 20px;"> Insurance plan </h3>
-    <form method="POST" action="" class="text-left"> -->
+
 		<div class="row justify-content-center" style="margin-top: 15px;">
 			<label for="type" style="margin-top:5px;"></label>
-			<table class="table col-md-6 text-center">
+			<table class="table col-md-5 mr-5 text-center">
        		 <tr>
             <th><font color="#e66500">Bronze</font>: 1 Year<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="1"></th>
             <th><font color="#8b8b8b">Silver</font>: 2 Years<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="2"></th>
@@ -75,24 +76,8 @@ require_once 'navbar.php';
             <th><font color="#00dbc4">Platinum</font>: 10 Years<input type="radio" style="margin-left:3px; margin-top:6px; margin-right:10px" name="type" value="10"></th>
         	</tr>
 			</table>
-			
-		</div>
-		<div class="row justify-content-center" style="margin-top: 15px;">
-		<input type="submit" class="btn btn-primary" value="Submit" name="submitButton"></input>
-		</div>
-		
-		<hr class="my-4"></hr>
-		<div class="container-fluid padding">
-		<div class="row welcome text-center">
-			<div class="col-12">
-				<h4 class="display-5" style="margin-bottom: 30px">Add to an existing insurance</h4>
-			</div>
-		</div>
-		</div>
-
-		<div class="row justify-content-center" style="margin-top: 15px;">
-			<table class="table col-md-11 text-center table-striped">
-                <thead class="thead-dark">
+			<table class="table col-md-5 text-center table-striped">
+                <thead class="text-white bg-success">
 				<tr>
                     
 					<th >Insurance ID</th>
@@ -102,10 +87,7 @@ require_once 'navbar.php';
 				</tr>
                 </thead>
 			<?php
-				$email = $_SESSION['email'];
-				$query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-				$result = mysqli_fetch_array($query);
-				$cid = $result['c_id'];       
+				$cid = $_SESSION['c_id'];       
 				$homes_list_query = "SELECT * FROM insurance WHERE c_id='$cid' and insurance_type='A'";
 				$result = $conn->query($homes_list_query);
 				if($result-> num_rows > 0) {
@@ -121,9 +103,16 @@ require_once 'navbar.php';
 			
 			</table>
     	</div>
-		<div class="row justify-content-center" style="margin-top: 15px;">
-		<input type="submit" class="btn btn-primary" value="Submit" name="submitButton2"></input>
-		</div>
+        <div class="container-fluid padding">
+            <div class="row welcome text-center justify-content-center">
+                <div class="col-md-5 mr-3 mt-3">
+                    <input type="submit" class="btn btn-success" value="Submit" name="submitButton"></input>
+                </div>
+                <div class="col-md-5 mt-3">
+                    <input type="submit" class="btn btn-success" value="Submit" name="submitButton2"></input>
+                </div>
+            </div>
+	    </div>
 	</form>
 
 
@@ -133,10 +122,7 @@ require_once 'navbar.php';
 	
 	function registerIns($plan) {
 		global $conn;
-		$email = $_SESSION['email'];
-        $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-        $result = mysqli_fetch_array($query);
-        $cid = $result['c_id'];
+		$cid = $_SESSION['c_id'];
 		$homes_list_query = "SELECT * FROM vehicles WHERE c_id='$cid'";
         $result = $conn->query($homes_list_query);
 		$insurance_type = "A";
@@ -180,9 +166,7 @@ require_once 'navbar.php';
         $result = mysqli_fetch_array($query);
 		$in_plan = $result['insurance_plan'];
 		$add_amount = $result['premium_amount'];
-        $query = mysqli_query($conn, "SELECT c_id FROM customer WHERE EMAIL='$email'");
-        $result = mysqli_fetch_array($query);
-        $cid = $result['c_id'];
+        $cid = $_SESSION['c_id'];
 		$homes_list_query = "SELECT * FROM vehicles WHERE c_id='$cid'";
         $result = $conn->query($homes_list_query);
 		
@@ -209,9 +193,19 @@ require_once 'navbar.php';
 		$plan = $_POST['type'];
 		$status = registerIns($plan);
 		if($status == 1) {
-			echo "<script>alert('Successfull');</script>";
+			echo "
+          <script> 
+            window.location.replace('ainsurance_2.php');
+            alert('Successfull');
+          </script>
+          ";
 		} else {
-			echo "<script>alert('Failed');</script>";
+			echo "
+          <script> 
+            window.location.replace('ainsurance_2.php');
+            alert('Failed');
+          </script>
+          ";
 		}
 	}
 
@@ -219,9 +213,19 @@ require_once 'navbar.php';
 		$plan = $_POST['iplan'];
 		$status = updateIns($plan);
 		if($status == 1) {
-			echo "<script>alert('Successfull');</script>";
+			echo "
+          <script> 
+            window.location.replace('ainsurance_2.php');
+            alert('Successfull');
+          </script>
+          ";
 		} else {
-			echo "<script>alert('Failed');</script>";
+			echo "
+          <script> 
+            window.location.replace('ainsurance_2.php');
+            alert('Failed');
+          </script>
+          ";
 		}
 	}
 
