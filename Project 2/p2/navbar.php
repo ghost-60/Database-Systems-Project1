@@ -91,7 +91,7 @@ if(!isset($_SESSION['email'])){
                     <a href="payment.php">Payments</a>
                 </li>
                 <li>
-                    <a href="#">Analytics</a>
+                    <a href="analytics.php">Analytics</a>
                 </li>
                 <li>
                     <a href="profile.php">Profile</a>
@@ -115,6 +115,17 @@ if(!isset($_SESSION['email'])){
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active" style="margin-right:20px">
+                                <a class="nav-link" href="#">Hello
+                                    <?php
+                                    $email = $_SESSION['email'];
+                                    $query = mysqli_query($conn, "SELECT * FROM customer WHERE EMAIL='$email'");
+                                    $result = mysqli_fetch_array($query);
+                                    echo $result['first_name'];
+                                    ?>
+
+                                </a>
+                            </li>
                             <form class="form-inline">
                                 <input class="form-control mr-sm-2" type="search" placeholder="Search"
                                     aria-label="Search">

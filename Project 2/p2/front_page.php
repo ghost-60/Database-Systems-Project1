@@ -44,10 +44,10 @@ if(isset($_SESSION['email'])){
 					<a class="nav-link" data-toggle="modal" data-target="#exampleModal2" href="#">Sign Up</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">Services</a>
+					<a class="nav-link" href="#services">Services</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#">About</a>
+					<a class="nav-link" href="#footerand">About</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#footerand">Contact</a>
@@ -265,7 +265,7 @@ if(isset($_SESSION['email'])){
 		<hr>
 		<div class="col-12">
 			<p class="lead">
-				asdasdasdasass sasdasaas asasass asassas sasaasas assaas asassa sasasa
+				Get quick, reliable and affordable service 
 			</p>
 		</div>
 	</div>
@@ -273,7 +273,7 @@ if(isset($_SESSION['email'])){
 
 <!--- Three Column Section -->
 
-<div class="container-fluid padding">
+<div class="container-fluid padding" id="services">
 	<div class="row text-center padding">
 		<div class="col-xs-12 col-sm-6 col-md-6">
 			<i class="fas fa-code"></i>
@@ -300,13 +300,13 @@ if(isset($_SESSION['email'])){
 		<div class="col-md-12 col-lg-6">
 			<h2>Benefits</h2>
 			<p>
-				sadasdsadsa
+				Saves you from unnecessary struggle
 			</p>
 			<p>
-				sadsasadsa
+				Monthly gift cards
 			</p>
 			<p>
-				saassaadsas
+				Save your money from multiple insurances
 			</p>
 			<br>
 			<a href="#" class="btn btn-primary">Learn More</a>
@@ -347,7 +347,7 @@ if(isset($_SESSION['email'])){
 				<img class="card-img-top" src="img/team1.png">
 				<div class="card-body">
 					<h4 class="card-title">Kumar Ayush</h4>
-					<p class="card-text">blah blal blah</p>
+					<p class="card-text">Qualifications</p>
 				</div>
 			</div>
 		</div>
@@ -356,7 +356,7 @@ if(isset($_SESSION['email'])){
 				<img class="card-img-top" src="img/team2.png">
 				<div class="card-body">
 					<h4 class="card-title">VS</h4>
-					<p class="card-text">blah blal blah</p>
+					<p class="card-text">Qualifications</p>
 				</div>
 			</div>
 		</div>
