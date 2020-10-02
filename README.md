@@ -1,7 +1,7 @@
 # Database-Systems-Project1
 
 Built a website for profiling Home and Auto Insurance for customers.
-
+![Img](https://github.com/ghost-60/Database-Systems-Project1/blob/master/img_git/fp.png "Frot page")
 ## Features
 
 ### General
