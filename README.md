@@ -2,7 +2,7 @@
 
 Built a website for profiling Home and Auto Insurance for customers.
 
-##Features
+## Features
 
 ### General
 -Session Variable is used to distinguish between different sessions for users. It's also responsible for maintaining database integrity. After a certain threshold of inactivity, the user is automatically logged out.
@@ -26,7 +26,7 @@ Built a website for profiling Home and Auto Insurance for customers.
 -After the due date has passed, the status becomes overdue and an interest is added per  month the invoice isn’t paid.
 -After cancelling any insurance, the invoice for that month must still be paid as it's an advance payment model.
 
-###Analytics
+### Analytics
 -Customers can see the graph detailing how much they are paying per month for each insurance. 
 -A visualization for the most popular insurance plan is also shown.
 -These features are also available for admin who is shown the data for all customers.
